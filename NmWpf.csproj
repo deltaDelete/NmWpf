@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathParser.org-mXparser" Version="5.0.6" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" />
+    <PackageReference Include="WPF-UI" Version="1.2.7" />
+  </ItemGroup>
+
+</Project>

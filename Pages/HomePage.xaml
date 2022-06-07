@@ -1,0 +1,138 @@
+﻿<Page x:Class="NmWpf.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NmWpf.Pages"
+      xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+      Style="{StaticResource UiPage}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <Thickness x:Key="ElementSpacing">5 25 5 0</Thickness>
+            <Thickness x:Key="ItemSpacing">5 10 5 0</Thickness>
+            <Thickness x:Key="FirstItemSpacing">5 5 5 0</Thickness>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="0 7 0 0"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Height" Value="34"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="{DynamicResource ItemSpacing}"/>
+            </Style>
+            <Style TargetType="wpfui:TextBox" BasedOn="{StaticResource UiTextBox}">
+                <Setter Property="Margin" Value="{DynamicResource ItemSpacing}"/>
+            </Style>
+            <Style TargetType="wpfui:NumberBox" BasedOn="{StaticResource {x:Type wpfui:NumberBox}}">
+                <Setter Property="Margin" Value="{DynamicResource ItemSpacing}"/>
+                <Setter Property="ControlsVisible" Value="False"/>
+                <Setter Property="IntegersOnly" Value="False"/>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="128"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--#region Labels-->
+        <TextBlock Text="f(x,y) = "
+                   Grid.Row="0"/>
+        <TextBlock Text="a = "
+                   Grid.Row="1"/>
+        <TextBlock Text="b = "
+                   Grid.Row="2"/>
+        <TextBlock Text="h = "
+                   Grid.Row="3"/>
+        <TextBlock Text="y₀ = "
+                   Grid.Row="4"/>
+        <TextBlock Text="Точность"
+                   Grid.Row="5"/>
+        <!--#endregion-->
+
+        <!--#region Inputs-->
+        <wpfui:TextBox Placeholder="x^2+1"
+                       MinWidth="256"
+                       Grid.Column="1"
+                       Grid.Row="0"
+                       Text="{Binding FValue, Mode=TwoWay}"
+                       x:Name="FValueBox"/>
+        <wpfui:NumberBox Placeholder="1,2"
+                         MinWidth="64"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         x:Name="AValueBox"
+                         IntegersOnly="False"/>
+        <wpfui:NumberBox Placeholder="1,3"
+                         MinWidth="64"
+                         Grid.Column="1"
+                         Grid.Row="2"
+                         x:Name="BValueBox"
+                         IntegersOnly="False"/>
+        <wpfui:NumberBox Placeholder="1,4"
+                         MinWidth="64"
+                         Grid.Column="1"
+                         Grid.Row="3"
+                         x:Name="HValueBox"
+                         Min="0.00000000000001"
+                         IntegersOnly="False"/>
+        <wpfui:NumberBox Placeholder="1,5"
+                         MinWidth="64"
+                         Grid.Column="1"
+                         Grid.Row="4"
+                         x:Name="Y0ValueBox"
+                         IntegersOnly="False"
+                         />
+        <wpfui:NumberBox Value="3"
+                         MinWidth="64"
+                         Grid.Column="1"
+                         Grid.Row="5"
+                         x:Name="PrecisionValueBox"
+                         IntegersOnly="True"
+                         Min="0"
+                         />
+        <!--#endregion-->
+        <wpfui:Button Click="Button_Click"
+                      Content="Решить"
+                      Margin="{DynamicResource ItemSpacing}"
+                      Height="34"
+                      Width="128"
+                      Grid.Column="1"
+                      Grid.Row="6"
+                      HorizontalAlignment="Right"/>
+        <!--#region Table-->
+        <DataGrid x:Name="ResultTable"
+                  ItemsSource="{Binding Result}"
+                  Grid.Column="2"
+                  Grid.RowSpan="6"
+                  Margin="5 10 5 0"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="X" Binding="{Binding Path=X}" Width="*" FontSize="14" />
+                <DataGridTextColumn Header="Y" Binding="{Binding Path=Y}" Width="*" FontSize="14" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--#endregion-->
+    </Grid>
+</Page>
