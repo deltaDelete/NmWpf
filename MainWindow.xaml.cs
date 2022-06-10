@@ -19,11 +19,9 @@ namespace NmWpf;
 /// </summary>
 public partial class MainWindow : Window {
     public MainWindow() {
-        WPFUI.Appearance.Background.Apply(
-            this,
-            WPFUI.Appearance.BackgroundType.Mica
-            );
         InitializeComponent();
+        if (WPFUI.Appearance.Background.IsSupported(WPFUI.Appearance.BackgroundType.Mica)) {
+            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica, true);
+        }
     }
-    public Page testPage { get; set; }
 }
