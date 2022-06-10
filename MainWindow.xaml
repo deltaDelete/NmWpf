@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:NmWpf" 
         xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
         Style="{StaticResource UiWindow}"
+        WindowStyle="None"
         Background="Transparent"
         mc:Ignorable="d"
         d:Background="#a333"
@@ -29,15 +30,23 @@
                                     Frame="{Binding ElementName=RootFrame}">
                 <wpfui:NavigationCompact.Items>
                     <wpfui:NavigationItem
-                        Content="Главная"
-                        Icon="Home24"
+                        Content="Метод Эйлера"
+                        Icon="Calculator24"
                         Page="{x:Type local:Pages.HomePage}"
-                        PageTag="testPage"/>
+                        PageTag="mainPage"
+                        Cursor="Hand"/>
+                    <wpfui:NavigationItem
+                        Content="Метод Рунге-Кутта"
+                        Icon="CalculatorMultiple24"
+                        Page="{x:Type local:Pages.RKPage}"
+                        PageTag="rkPage"
+                        Cursor="Hand"/>
                     <wpfui:NavigationItem
                         Content="О программе"
                         Icon="Info24"
                         Page="{x:Type local:Pages.InfoPage}"
-                        PageTag="infoPage" Cursor="Hand"/>
+                        PageTag="infoPage"
+                        Cursor="Hand"/>
                 </wpfui:NavigationCompact.Items>
             </wpfui:NavigationCompact>
 
