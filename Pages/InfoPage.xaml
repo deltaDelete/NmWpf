@@ -22,7 +22,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="О программе" FontSize="24" FontWeight="Bold" Grid.Row="0"/>
         <wpfui:Card
             Grid.Row="1"
             Grid.Column="0"

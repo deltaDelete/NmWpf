@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFUI.Appearance;
 
 namespace NmWpf;
 /// <summary>
@@ -20,8 +21,21 @@ namespace NmWpf;
 public partial class MainWindow : Window {
     public MainWindow() {
         InitializeComponent();
-        if (WPFUI.Appearance.Background.IsSupported(WPFUI.Appearance.BackgroundType.Mica)) {
-            WPFUI.Appearance.Background.Apply(this, WPFUI.Appearance.BackgroundType.Mica, true);
+        Loaded += (sender , e) => Theme.Apply(GetThemeTypeReversed(), GetBackgroundType(), true, true);
+    }
+    private void NavigationButtonTheme_OnClick(object sender, RoutedEventArgs e) {
+        Theme.Apply(GetThemeTypeReversed(), GetBackgroundType(), true, true);
+    }
+    private BackgroundType GetBackgroundType() {
+        if (Environment.OSVersion.Version.Build >= 22000) {
+            return BackgroundType.Mica;
         }
+        return BackgroundType.Auto;
+    }
+    private static ThemeType GetThemeTypeReversed() {
+        if (Environment.OSVersion.Version.Build >= 10240 && Theme.GetAppTheme() == ThemeType.Light) {
+            return ThemeType.Dark;
+        }
+        return ThemeType.Light;
     }
 }

@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NmWpf" 
         xmlns:wpfui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:pages="clr-namespace:NmWpf.Pages"
         Style="{StaticResource UiWindow}"
         WindowStyle="None"
         Background="Transparent"
+        MinWidth="800"
+        MinHeight="480"
         mc:Ignorable="d"
         d:Background="#a333"
         Title="MainWindow" Height="450" Width="800">
@@ -24,33 +27,46 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-            <wpfui:NavigationCompact Grid.Column="0" Margin="0,0,12,0" 
-                                    x:Name="RootNavigation"
-                                    Frame="{Binding ElementName=RootFrame}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <wpfui:NavigationCompact Grid.Column="0"
+                                     Grid.RowSpan="2"
+                                     Margin="0,0,12,0" 
+                                     x:Name="RootNavigation"
+                                     Frame="{Binding ElementName=RootFrame}">
                 <wpfui:NavigationCompact.Items>
                     <wpfui:NavigationItem
                         Content="Метод Эйлера"
                         Icon="Calculator24"
-                        Page="{x:Type local:Pages.HomePage}"
+                        Page="{x:Type pages:HomePage}"
                         PageTag="mainPage"
                         Cursor="Hand"/>
                     <wpfui:NavigationItem
                         Content="Метод Рунге-Кутта"
                         Icon="CalculatorMultiple24"
-                        Page="{x:Type local:Pages.RKPage}"
+                        Page="{x:Type pages:RKPage}"
                         PageTag="rkPage"
                         Cursor="Hand"/>
                     <wpfui:NavigationItem
                         Content="О программе"
                         Icon="Info24"
-                        Page="{x:Type local:Pages.InfoPage}"
+                        Page="{x:Type pages:InfoPage}"
                         PageTag="infoPage"
                         Cursor="Hand"/>
                 </wpfui:NavigationCompact.Items>
+                <wpfui:NavigationCompact.Footer>
+                    <wpfui:NavigationItem
+                        Click="NavigationButtonTheme_OnClick"
+                        Content="Тема"
+                        Icon="DarkTheme24" 
+                        Cursor="Hand"/>
+                </wpfui:NavigationCompact.Footer>
             </wpfui:NavigationCompact>
 
-            <Frame Grid.Column="1" x:Name="RootFrame"/>
+            <wpfui:Breadcrumb Grid.Column="1" Navigation="{Binding ElementName=RootNavigation}" Grid.Row="0"/>
+            <Frame Grid.Column="1" x:Name="RootFrame" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Window>
