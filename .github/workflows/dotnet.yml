@@ -24,9 +24,11 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
     - name: Create zip
-      uses: montudor/action-zip@v1
+      uses: thedoctor0/zip-release@main
       with:
-        args: zip -qq -r bin/Release/net6.0-windows/win-x64/publish/nmwpf.zip bin/Release/net6.0-windows/win-x64/publish/*
+        type: 'zip'
+        filename: 'nmwpf-win-x64.zip'
+        directory: bin/Release/net6.0-windows/win-x64/publish/
       
     - uses: actions/create-release@v1
       id: create_release
