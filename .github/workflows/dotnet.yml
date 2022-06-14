@@ -2,11 +2,8 @@ name: Deploy release
 
 on:
   push:
-    branches: [ "master" ]
-    tags: "v*"
-  pull_request:
-    branches: [ "master" ]
-    tags: "v*"
+    tags:
+      - "v*"
 
 jobs:
   build:
