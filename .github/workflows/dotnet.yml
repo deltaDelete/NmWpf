@@ -23,6 +23,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Publish
       run: dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
+    - name: Create zip
+      uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r nmwpf.zip *
+        working-directory: bin/Release/net6.0-windows/win-x64/publish/
       
     - uses: actions/create-release@v1
       id: create_release
@@ -33,5 +38,5 @@ jobs:
     - uses: csexton/release-asset-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        pattern: bin/Release/net6.0-windows/win-x64/publish/*
+        pattern: bin/Release/net6.0-windows/win-x64/publish/nmwpf.zip
         release-url: ${{ steps.create_release.outputs.upload_url }}
