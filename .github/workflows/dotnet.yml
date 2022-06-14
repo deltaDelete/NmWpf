@@ -20,9 +20,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore -c Release -r win-x64
+      run: dotnet build --no-restore
     - name: Publish
-      run: dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+      run: dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
     - name: Create zip
       uses: thedoctor0/zip-release@main
       with:
