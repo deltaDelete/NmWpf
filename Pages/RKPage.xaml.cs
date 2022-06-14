@@ -93,12 +93,12 @@ public partial class RKPage : Page {
     private void Button_Click(object sender, RoutedEventArgs e) {
         try {
             List<XY> r = NmSolder.RKSolve(FValue, AValue, Y0Value, BValue, HValue, EpsValue, PrecisionValue);
-            Result = r.Where(v => {
-                return v.X % HValue == 0 
-                || v.X == AValue 
-                || v.X == BValue
-                || Math.Round(v.X % HValue, 1) == 0.2;
-            });
+            List<double> vs = new List<double>();
+            for (double i = AValue; i <= BValue; i += HValue) {
+                vs.Add(Math.Round(i, PrecisionValue));
+            }
+
+            Result = r.Where(x => vs.Contains(x.X));
         }
         catch (Exception exc) {
             WPFUI.Controls.MessageBox mbox = new WPFUI.Controls.MessageBox();
