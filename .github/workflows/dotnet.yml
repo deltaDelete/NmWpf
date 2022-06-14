@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Publish
-      run: dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
+      run: dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
     - name: Create zip
       uses: thedoctor0/zip-release@main
       with:
@@ -39,5 +39,5 @@ jobs:
     - uses: csexton/release-asset-action@v2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        pattern: nmwpf-win-x64.zip
+        pattern: bin/Release/net6.0-windows/win-x64/publish/nmwpf-win-x64.zip
         release-url: ${{ steps.create_release.outputs.upload_url }}
