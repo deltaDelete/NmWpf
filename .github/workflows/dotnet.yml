@@ -1,0 +1,42 @@
+name: Deploy release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Publish
+      run: dotnet publish -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
+    - name: Create zip
+      uses: thedoctor0/zip-release@main
+      with:
+        type: 'zip'
+        filename: 'nmwpf-win-x64.zip'
+        directory: bin/Release/net6.0-windows/win-x64/publish/
+      
+    - uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+    - uses: csexton/release-asset-action@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        pattern: bin/Release/net6.0-windows/win-x64/publish/nmwpf-win-x64.zip
+        release-url: ${{ steps.create_release.outputs.upload_url }}
