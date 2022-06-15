@@ -78,27 +78,30 @@
                          Grid.Column="1"
                          Grid.Row="1"
                          x:Name="AValueBox"
-                         IntegersOnly="False"/>
+                         IntegersOnly="False"
+                         PreviewTextInput="NumberBox_PreviewTextInput"/>
         <wpfui:NumberBox Placeholder="1,3"
                          MinWidth="64"
                          Grid.Column="1"
                          Grid.Row="2"
                          x:Name="BValueBox"
-                         IntegersOnly="False"/>
+                         IntegersOnly="False"
+                         PreviewTextInput="NumberBox_PreviewTextInput"/>
         <wpfui:NumberBox Placeholder="1,4"
                          MinWidth="64"
                          Grid.Column="1"
                          Grid.Row="3"
                          x:Name="HValueBox"
                          Min="0.00000000000001"
-                         IntegersOnly="False"/>
+                         IntegersOnly="False"
+                         PreviewTextInput="NumberBox_PreviewTextInput"/>
         <wpfui:NumberBox Placeholder="1,5"
                          MinWidth="64"
                          Grid.Column="1"
                          Grid.Row="4"
                          x:Name="Y0ValueBox"
                          IntegersOnly="False"
-                         />
+                         PreviewTextInput="NumberBox_PreviewTextInput"/>
         <wpfui:NumberBox Value="3"
                          MinWidth="64"
                          Grid.Column="1"
@@ -106,7 +109,7 @@
                          x:Name="PrecisionValueBox"
                          IntegersOnly="True"
                          Min="0"
-                         />
+                         PreviewTextInput="NumberBox_PreviewTextInput"/>
         <!--#endregion-->
         <wpfui:Button Click="Button_Click"
                       Content="Решить"

@@ -119,4 +119,14 @@ public partial class RKPage : Page {
             mbox.Show();
         }
     }
+
+    private void NumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+        e.Handled = !e.Text.All(c => {
+            if (c >= '0' && c <= '9')
+                return true;
+            if (c == ',')
+                return true;
+            return false;
+        });
+    }
 }

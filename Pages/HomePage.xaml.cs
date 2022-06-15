@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,5 +106,14 @@ public partial class HomePage : Page, INotifyPropertyChanged {
             };
             mbox.Show();
         }
+    }
+    private void NumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+        e.Handled = !e.Text.All(c => {
+            if (c >= '0' && c <= '9')
+                return true;
+            if (c == ',')
+                return true;
+            return false;
+        });
     }
 }
